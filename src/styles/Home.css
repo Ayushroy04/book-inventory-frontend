@@ -455,6 +455,11 @@
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 768px) {
 
+    .hero-headline {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        word-wrap: break-word;
+    }
+
     .home-hero,
     .home-collection,
     .home-cta,
