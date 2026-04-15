@@ -135,13 +135,19 @@
     gap: 0.6rem;
 }
 
-.navbar-email {
-    color: rgba(255, 255, 255, 0.35);
-    font-size: 0.8rem;
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.navbar-my-account {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 0.85rem;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
     white-space: nowrap;
+}
+
+.navbar-my-account:hover {
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(99, 102, 241, 0.1);
 }
 
 .btn-logout {
@@ -195,25 +201,127 @@
     transform: scale(0.98);
 }
 
+/* Hamburger button — hidden on desktop */
+.navbar-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    z-index: 200;
+}
+
+.ham-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    transition: all 0.25s;
+}
+
+/* Mobile dropdown */
+.mobile-menu {
+    display: none;
+}
+
+.cart-badge-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    padding: 0 3px;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
 /* Responsive Mobile Layout */
 @media (max-width: 768px) {
     .navbar {
-        padding: 0 0.5rem;
+        padding: 0 1rem;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 56px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
+
     .search-bar {
         display: none;
     }
-    .navbar-email {
+
+    /* Hide desktop nav and auth on mobile */
+    .navbar-links,
+    .navbar-auth {
         display: none;
     }
-    .btn-nav-outline, .btn-nav-primary, .btn-logout {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.75rem;
+
+    /* Show hamburger */
+    .navbar-hamburger {
+        display: flex;
+        margin-left: auto;
     }
+
     .navbar-brand {
         font-size: 1rem;
     }
+
     .brand-logo {
         height: 24px;
+    }
+
+    /* Full-width dropdown below navbar */
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(10, 10, 20, 0.97);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding: 8px 0 16px;
+        order: 3;
+        animation: slideDown 0.2s ease;
+    }
+
+    .mobile-menu a,
+    .mobile-menu button {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        color: rgba(255,255,255,0.7);
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-align: left;
+        background: transparent;
+        border: none;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu button:hover {
+        background: rgba(255,255,255,0.06);
+        color: #f1f5f9;
+    }
+
+    .mobile-logout {
+        color: #f87171 !important;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        margin-top: 8px;
+        padding-top: 16px !important;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-8px); }
+        to   { opacity: 1; transform: translateY(0); }
     }
 }
