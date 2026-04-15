@@ -1,5 +1,6 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import { User, MapPin, Package, Shield, LifeBuoy } from 'lucide-react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { User, MapPin, Package, Shield, LifeBuoy, LogOut } from 'lucide-react';
 import './MyAccountLayout.css';
 
 const navItems = [
@@ -11,6 +12,13 @@ const navItems = [
 ];
 
 export default function MyAccountLayout() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   return (
     <div className="account-root">
       <aside className="account-sidebar">
@@ -28,6 +36,11 @@ export default function MyAccountLayout() {
               <span>{label}</span>
             </NavLink>
           ))}
+
+          <button className="sidebar-link sidebar-logout" onClick={handleLogout}>
+            <LogOut size={18} />
+            <span>Logout</span>
+          </button>
         </nav>
       </aside>
       <main className="account-content">

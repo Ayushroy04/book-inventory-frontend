@@ -54,6 +54,21 @@
   color: #818cf8;
 }
 
+.sidebar-logout {
+  width: 100%;
+  margin-top: 8px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
+}
+
+.sidebar-logout:hover {
+  background: rgba(248, 113, 113, 0.1);
+  color: #f87171;
+}
+
 .account-content {
   flex: 1;
   padding: 40px;

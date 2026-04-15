@@ -99,7 +99,7 @@ export default function Navbar() {
             <div className="navbar-auth">
                 {user ? (
                     <>
-                        <span className="navbar-email">{user.email}</span>
+                        <Link to="/my-account" className="navbar-email">My Account</Link>
                         <button className="btn-logout" onClick={handleLogout}>Logout</button>
                     </>
                 ) : (
