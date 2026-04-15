@@ -20,10 +20,17 @@ export function AuthProvider({ children }) {
         setUser(null);
     };
 
+    // Call this after any profile/address update to keep localStorage in sync
+    const updateUser = (partialData) => {
+        const updated = { ...user, ...partialData };
+        localStorage.setItem('user', JSON.stringify(updated));
+        setUser(updated);
+    };
+
     const isAdmin = user?.role === 'ADMIN';
 
     return (
-        <AuthContext.Provider value={{ user, login, logout, isAdmin }}>
+        <AuthContext.Provider value={{ user, login, logout, isAdmin, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

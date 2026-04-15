@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { User, Camera } from 'lucide-react';
+import { User } from 'lucide-react';
 
 export default function Profile() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [form, setForm] = useState({
     username: user?.username || '',
@@ -31,7 +31,10 @@ export default function Profile() {
           body: JSON.stringify(form),
         }
       );
-      if (res.ok) { setSaved(true); setTimeout(() => setSaved(false), 2500); }
+      if (res.ok) {
+        updateUser(form); // ← keep AuthContext & localStorage in sync
+        setSaved(true); setTimeout(() => setSaved(false), 2500);
+      }
     } catch (err) {
       console.error(err);
     } finally {

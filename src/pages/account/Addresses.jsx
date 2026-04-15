@@ -5,7 +5,7 @@ import { Plus, Pencil, Trash2, CheckCircle } from 'lucide-react';
 const EMPTY = { fullName:'', phone:'', addressLine1:'', addressLine2:'', city:'', state:'', postalCode:'', country:'', isDefault: false };
 
 export default function Addresses() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [addresses, setAddresses] = useState([]);
   const [editing, setEditing]     = useState(null); // null | 'new' | index
   const [form, setForm]           = useState(EMPTY);
@@ -42,6 +42,7 @@ export default function Addresses() {
     }
     await saveToBackend(updated);
     setAddresses(updated);
+    updateUser({ address: updated }); // ← keep context/localStorage in sync
     setEditing(null);
     setForm(EMPTY);
     setLoading(false);
@@ -51,6 +52,7 @@ export default function Addresses() {
     const updated = addresses.filter((_, i) => i !== idx);
     await saveToBackend(updated);
     setAddresses(updated);
+    updateUser({ address: updated });
   };
 
   const handleEdit = (idx) => { setForm(addresses[idx]); setEditing(idx); };
